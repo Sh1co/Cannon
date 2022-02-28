@@ -551,11 +551,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398760e0e18c88041a5dc913774506e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanInterval: 1
+  _fovAngle: 80
+  _shootCooldown: 1
   _boxCastSize: {x: 15, y: 15, z: 0}
   _targetLayers:
     serializedVersion: 2
     m_Bits: 8
+  _projectileSpawnPoint: {fileID: 468099999}
+  _rotationSpeed: 40
+  _cannonBarrel: {fileID: 156290312}
+  _projectileGameObject: {fileID: 1881226597579656917, guid: 62410a46d5aaddb4497bf17a7925deec, type: 3}
+  _projectileSpeed: 70
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +669,7 @@ GameObject:
   - component: {fileID: 728236345}
   m_Layer: 3
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
