@@ -32,15 +32,20 @@ public class Cannon : MonoBehaviour
 
             foreach (var hit in hits)
             {
-                if (GetAngle(hit.transform) * 2 < _fovAngle)
-                {
-                    _target = hit.collider.gameObject;
-                    break;
-                }
+                if (!(GetAngle(hit.transform) * 2 < _fovAngle)) continue;
+                _target = hit.collider.gameObject;
+                break;
             }
         }
         else
         {
+            if ( _targetLayers != (_targetLayers | (1 << _target.layer)))
+            {
+                Debug.Log("in");
+                _target = null;
+                return;
+            }
+            
             var baseDesiredDirection = _target.transform.position - _transform.position;
             var baseCross = Vector3.Cross(baseDesiredDirection, _transform.forward);
             var baseDir = Mathf.Abs(baseCross.y) < 0.05 ? 0 : baseCross.y > 0 ? -1 : 1;
