@@ -41,7 +41,6 @@ public class Cannon : MonoBehaviour
         {
             if ( _targetLayers != (_targetLayers | (1 << _target.layer)))
             {
-                Debug.Log("in");
                 _target = null;
                 return;
             }
