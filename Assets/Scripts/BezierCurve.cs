@@ -49,7 +49,6 @@ public class BezierCurve : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (!_doingCurve) return;
-        Debug.Log(other.gameObject.name);
         _doingCurve = false;
         _rb.isKinematic = false;
         _rb.velocity = GetVelocity(GetT());
