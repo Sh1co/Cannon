@@ -41,11 +41,18 @@ public class Cannon : MonoBehaviour
         }
         else
         {
-            var desiredDirection = _target.transform.position - _transform.position;
-            var cross = Vector3.Cross(desiredDirection, _transform.forward);
-            var yDir = Mathf.Abs(cross.y) < 0.1 ? 0 : cross.y > 0 ? -1 : 1;
-            transform.Rotate(0f, _rotationSpeed * Time.deltaTime * yDir, 0f);
-            if (Mathf.Abs(cross.y) < 0.1 && _timeCounter >= _shootCooldown)
+            var baseDesiredDirection = _target.transform.position - _transform.position;
+            var baseCross = Vector3.Cross(baseDesiredDirection, _transform.forward);
+            var baseDir = Mathf.Abs(baseCross.y) < 0.05 ? 0 : baseCross.y > 0 ? -1 : 1;
+            
+            var barrelDesiredDirection = _target.transform.position - _cannonBarrel.position;
+            var barrelCross = Vector3.Cross(barrelDesiredDirection, _cannonBarrel.up);
+            var barrelDir = Mathf.Abs(barrelCross.x) <= 0.1 ? 0 : barrelCross.x > 0 ? -1 : 1;
+            
+            _transform.Rotate(0f, _rotationSpeed * Time.deltaTime * baseDir, 0f);
+            _cannonBarrel.Rotate(_rotationSpeed * Time.deltaTime * barrelDir, 0f, 0f);
+            
+            if (Mathf.Abs(baseCross.y) < 0.05 && Mathf.Abs(barrelCross.x) <= 0.1 && _timeCounter >= _shootCooldown)
             {
                 Shoot();
             }
